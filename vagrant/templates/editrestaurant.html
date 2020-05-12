@@ -1,0 +1,12 @@
+<html>
+
+<body>
+
+<form method="POST" enctype="multipart/form-data" action="{{url_for('editRestaurant', restaurant_id=restaurant.id)}}">
+    <p>Enter new name for {{restaurant.name}}:</p>
+    <input type="text" name="name" >
+    <input type="submit" value="Change">
+</form>
+
+</body>
+</html>

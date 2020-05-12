@@ -40,6 +40,38 @@ def deleteRestaurant(session, id):
     return r    
 
 
+def getMenuItems(session, restaurantId):
+    return session.query(MenuItem).filter_by(restaurant_id = restaurantId).all()
+
+def getMenuItem(session, menuItemId):
+    return session.query(MenuItem).filter_by(id = menuItemId).one()
+
+
+
+def addNewMenuItem(session, restaurant_id, name, price, description):
+    i = MenuItem(name = name, restaurant_id = restaurant_id)
+    i.price = price
+    i.description = description
+    session.add(i)
+    session.commit()
+    return i
+
+def editMenuItem(session, menu_id, name):
+    i = session.query(MenuItem).filter_by(id = menu_id).one()
+    print("Change name from {0} to {1}".format(i.name, name))
+    i.name = name 
+    session.add(i)
+    session.commit()
+    return i
+
+
+def deleteMenuItem(session, menu_id):
+    i = session.query(MenuItem).filter_by(id = menu_id).one()
+    session.delete(i)
+    session.commit()
+    return i
+
+
 '''
 myFirstRestaurant = Restaurant(name = "Pizza Palace")
 session.add(myFirstRestaurant)
